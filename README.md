@@ -1,4 +1,4 @@
 py-solusvm-api
 ==============
 
-Python SolusVM JSON API
+Python SolusVM JSON API Library
