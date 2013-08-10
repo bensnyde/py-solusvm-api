@@ -6,19 +6,19 @@ class SolusVM:
                 self.id = api_id
                 self.key = api_key
 
-        def sQuery(self, args):
+        def sQuery(self, **kwargs):
                 """
                 Queries specified SolusVM API with specified query string.
 
                 Arguments
                 ---
-                args:dict - name:value get paramter pairs.
+                data:dict - name:value get paramter pairs.
 
                 Returns JSON response from server
                 """
-                args.update({'rdtype':'json','id':self.id,'key':self.key})
-                r = requests.get('https://'+self.url+':5656/api/admin/command.php', params=args, timeout=2)
-                return r.text
+                kwargs.update({'rdtype':'json','id':self.id,'key':self.key})
+                response = requests.get('https://'+self.url+':5656/api/admin/command.php', params=kwargs, timeout=2)
+                return response.text
 
         def listVirtualServers(self, nodeid):
                 """
@@ -30,23 +30,29 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
-                virtualservers
-                -vserverid:str
-                -ctid:str
-                -clientid:str
-                -ipaddress:str
-                -hostname:str
-                -template:str
-                -hdd:str
-                -memory:str
-                -swap-burst:str
-                -type:str
-                -mac:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
+        			<virtualservers>
+				 <virtualserver>                              
+				  <vserverid>[vserverid]</vserverid>
+				  <ctid-xid>[ctid or xen id]</ctid-xid>
+				  <clientid>[clientid]</clientid>
+				  <ipaddress>[main ipaddress]</ipaddress>
+				  <hostname>[hostname]</hostname>
+				  <template>[template]</template>
+				  <hdd>[diskspace]</hdd>
+				  <memory>[memory]</memory>
+				  <swap-burst>[swp or burst memory]</swap-burst>
+				  <type>[openvz/xen/xenhvm]</type>
+				  <mac>[mac address]</mac>
+				 </virtualserver>
+				</virtualservers>
                 """
-                args = {'action':'node-virtualservers', 'nodeid':nodeid}
-                return self.sQuery(args)
+                data = {
+                	'action': 'node-virtualservers', 
+                	'nodeid': nodeid
+                }
+                return self.sQuery(**data)
 
         def diablePXE(self, vserverid):
                 """
@@ -58,11 +64,14 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 """
-                args = {'action':'vserver-network-disable', 'vserverid':vserverid}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-network-disable', 
+                	'vserverid': vserverid
+                }
+                return self.sQuery(**data)
 
         def enablePXE(self, vserverid):
                 """
@@ -74,11 +83,14 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 """
-                args = {'action':'vserver-network-enable', 'vserverid':vserverid}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-network-enable', 
+                	'vserverid': vserverid
+                }
+                return self.sQuery(**data)
 
         def enableTUN(self, vserverid):
                 """
@@ -90,11 +102,14 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 """
-                args = {'action':'vserver-tun-enable', 'vserverid':vserverid}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-tun-enable', 
+                	'vserverid': vserverid
+                }
+                return self.sQuery(**data)
 
         def disableTUN(self, vserverid):
                 """
@@ -106,11 +121,14 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 """
-                args = {'action':'vserver-tun-disable', 'vserverid':vserverid}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-tun-disable', 
+                	'vserverid': vserverid
+                }
+                return self.sQuery(**data)
 
         def togglePAE(self, vserverid, pae):
                 """
@@ -123,11 +141,15 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 """
-                args = {'action':'vserver-pae', 'vserverid':vserverid, 'pae':pae}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-pae', 
+                	'vserverid': vserverid, 
+                	'pae':pae
+                }
+                return self.sQuery(**data)
 
         def shutdownVirtualServer(self, vserverid):
                 """
@@ -139,11 +161,14 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 """
-                args = {'action':'vserver-shutdown', 'vserverid':vserverid}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-shutdown', 
+                	'vserverid': vserverid
+                }
+                return self.sQuery(**data)
 
         def terminateVirtualServer(self, vserverid, deleteclient=False):
                 """
@@ -156,11 +181,15 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 """
-                args = {'action':'vserver-terminate', 'vserverid':vserverid, 'deleteclient':deleteclient}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-terminate', 
+                	'vserverid': vserverid, 
+                	'deleteclient': deleteclient
+                }
+                return self.sQuery(**data)
 
         def changeVNCPassword(self, vserverid, vncpassword):
                 """
@@ -173,12 +202,16 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
-                vncpassword:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
+                <vncpassword />
                 """
-                args = {'action':'vserver-vncpass', 'vserverid':vserverid, 'vncpassword':vncpassword}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-vncpass', 
+                	'vserverid': vserverid, 
+                	'vncpassword': vncpassword
+                }
+                return self.sQuery(**data)
 
         def vncInfo(self, vserverid):
                 """
@@ -190,15 +223,18 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 type:str
                 vncip:str
                 vncport:str
                 vncpassword:str
                 """
-                args = {'action':'vserver-vnc', 'vserverid':vserverid}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-vnc', 
+                	'vserverid': vserverid
+                }
+                return self.sQuery(**data)
 
         def suspendVirtualServer(self, vserverid):
                 """
@@ -210,11 +246,14 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 """
-                args = {'action':'vserver-suspend', 'vserverid':vserverid}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-suspend', 
+                	'vserverid':vserverid
+                }
+                return self.sQuery(**data)
 
         def unsuspendVirtualServer(self, vserverid):
                 """
@@ -226,11 +265,14 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 """
-                args = {'action':'vserver-unsuspend', 'vserverid':vserverid}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-unsuspend', 
+                	'vserverid': vserverid
+                }
+                return self.sQuery(**data)
 
         def virtualServerStatus(self, vserverid):
                 """
@@ -242,11 +284,14 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str           [disabled|online|offline]
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 """
-                args = {'action':'vserver-status', 'vserverid':vserverid}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-status', 
+                	'vserverid': vserverid
+                }
+                return self.sQuery(**data)
 
         def changeRootPassword(self, vserverid, rootpassword):
                 """
@@ -259,12 +304,16 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 rootpassword:str
                 """
-                args = {'action':'vserver-rootpassword', 'vserverid':vserverid,'rootpassword':rootpassword}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-rootpassword', 
+                	'vserverid': vserverid,
+                	'rootpassword': rootpassword
+                }
+                return self.sQuery(**data)
 
         def rebuildVirtualServer(self, vserverid, template):
                 """
@@ -277,11 +326,15 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 """
-                args = {'action':'vserver-rebuild', 'vserverid':vserverid,'template':template}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-rebuild', 
+                	'vserverid': vserverid,
+                	'template': template
+                }
+                return self.sQuery(**data)
 
         def changeHostname(self, vserverid, hostname):
                 """
@@ -294,12 +347,16 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 hostname:str
                 """
-                args = {'action':'vserver-hostname', 'vserverid':vserverid,'hostname':hostname}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-hostname', 
+                	'vserverid': vserverid,
+                	'hostname': hostname
+                }
+                return self.sQuery(**data)
 
         def rebootVirtualServer(self, vserverid):
                 """
@@ -311,11 +368,14 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 """
-                args = {'action':'vserver-reboot', 'vserverid':vserverid}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-reboot', 
+                	'vserverid': vserverid
+                }
+                return self.sQuery(**data)
 
         def unmountISO(self, vserverid):
                 """
@@ -327,11 +387,14 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 """
-                args = {'action':'vserver-reboot', 'vserverid':vserverid}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-reboot', 
+                	'vserverid': vserverid
+                }
+                return self.sQuery(**data)
 
         def mountISO(self, vserverid, iso):
                 """
@@ -344,11 +407,15 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 """
-                args = {'action':'vserver-mountiso', 'vserverid':vserverid, 'iso':iso}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-mountiso', 
+                	'vserverid': vserverid, 
+                	'iso': iso
+                }
+                return self.sQuery(**data)
 
         def checkVirtualServerExists(self, vserverid):
                 """
@@ -360,11 +427,14 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 """
-                args = {'action':'vserver-checkexists', 'vserverid':vserverid}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-checkexists', 
+                	'vserverid': vserverid
+                }
+                return self.sQuery(**data)
 
         def virtualServerState(self, vserverid, nostatus=False, nographs=False):
                 """
@@ -378,8 +448,8 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 state:str                       [online|offline|disabled]
                 ipaddresses:csv         [ip1,ip2,ip3]
                 mainipaddress:str       [main ip address]
@@ -393,8 +463,13 @@ class SolusVM:
                 memory:csv                      [total, used, free, percent used]
                 internalips:str         [internal ip address]
                 """
-                args = {'action':'vserver-infoall', 'vserverid':vserverid, 'nostatus':nostatus, 'nographs':nographs}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-infoall', 
+                	'vserverid': vserverid, 
+                	'nostatus': nostatus, 
+                	'nographs': nographs
+                }
+                return self.sQuery(**data)
 
         def virtualServerInfo(self, vserverid):
                 """
@@ -406,8 +481,8 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 vserverid:str
                 ctid-xid:str
                 clientid:str
@@ -420,8 +495,11 @@ class SolusVM:
                 type:str
                 mac:str
                 """
-                args = {'action':'vserver-info', 'vserverid':vserverid}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-info', 
+                	'vserverid': vserverid
+                }
+                return self.sQuery(**data)
 
         def deleteIPAddress(self, vserverid, ipaddr):
                 """
@@ -434,11 +512,15 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 """
-                args = {'action':'vserver-delip', 'vserverid':vserverid, 'ipaddr':ipaddr}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-delip', 
+                	'vserverid': vserverid, 
+                	'ipaddr':ipaddr
+                }
+                return self.sQuery(**data)
 
         def toggleSerialConsole(self, vserverid, access=None, time=None):
                 """
@@ -452,8 +534,8 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 created:str
                 type:str
                 consoleip:str
@@ -464,8 +546,13 @@ class SolusVM:
                 sessionactive:str
                 sessionexpire:int
                 """
-                args = {'action':'vserver-console', 'vserverid':vserverid, 'time':time, 'access':access}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-console', 
+                	'vserverid': vserverid, 
+                	'time': time, 
+                	'access': access
+                }
+                return self.sQuery(**data)
 
         def changePlan(self, vserverid, plan):
                 """
@@ -478,11 +565,15 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 """
-                args = {'action':'vserver-change', 'vserverid':vserverid, 'plan':plan}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-change', 
+                	'vserverid': vserverid, 
+                	'plan':plan
+                }
+                return self.sQuery(**data)
 
         def changeOwner(self, vserverid, clientid):
                 """
@@ -495,11 +586,15 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 """
-                args = {'action':'vserver-changeowner', 'vserverid':vserverid, 'clientid':clientid}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-changeowner', 
+                	'vserverid': vserverid, 
+                	'clientid': clientid
+                }
+                return self.sQuery(**data)
 
         def changeBootOrder(self, vserverid, bootorder):
                 """
@@ -512,11 +607,15 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 """
-                args = {'action':'vserver-bootorder', 'vserverid':vserverid, 'bootorder':bootorder}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-bootorder', 
+                	'vserverid': vserverid, 
+                	'bootorder': bootorder
+                }
+                return self.sQuery(**data)
 
         def addIPAddress(self, vserverid):
                 """
@@ -527,13 +626,16 @@ class SolusVM:
                 vserverid:str           [id of virtual server]
 
                 Returns JSON
-                ---
-                status:str              [success|error]
-                statusmsg:str
+                  ---
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 ipaddress:str
                 """
-                args = {'action':'vserver-addip', 'vserverid':vserverid}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-addip', 
+                	'vserverid': vserverid
+                }
+                return self.sQuery(**data)
 
         def bootVirtualServer(self, vserverid):
                 """
@@ -545,11 +647,14 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 """
-                args = {'action':'vserver-boot', 'vserverid':vserverid}
-                return self.sQuery(args)
+                data = {
+                	'action': 'vserver-boot', 
+                	'vserverid': vserverid
+                }
+                return self.sQuery(**data)
 
         def createVirtualServer(self, vtype, node, nodegroup, hostname, password, username, plan, template, ips,
                         hvmt=None, custommemory=None, customdiskspace=None, custombandwidth=None, customcpu=None,
@@ -579,8 +684,8 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 mainipaddress:str
                 extraipaddress:csv
                 rootpassword:str
@@ -591,13 +696,27 @@ class SolusVM:
                 virtid:str
                 nodeid:str
                 """
-                args = {
-                        'action':'vserver-create', 'type':vtype, 'node':node, 'nodegroup':nodegroup, 'hostname':hostname, 'password':password,
-                        'username':username, 'plan':plan, 'template':template, 'ips':ips, 'hvmt':hvmt, 'custommemory':custommemory,
-                        'customdiskspace':customdiskspace, 'custombandwidth':custombandwidth, 'customcpu':customcpu, 'customextraip':customextraip,
-                        'issuelicense':issuelicense, 'internalip':internalip
+                data = {
+                        'action': 'vserver-create', 
+                        'type': vtype, 
+                        'node': node, 
+                        'nodegroup': nodegroup, 
+                        'hostname': hostname, 
+                        'password': password,
+                        'username': username, 
+                        'plan': plan, 
+                        'template': template, 
+                        'ips': ips, 
+                        'hvmt': hvmt, 
+                        'custommemory': custommemory,
+                        'customdiskspace': customdiskspace, 
+                        'custombandwidth': custombandwidth, 
+                        'customcpu': customcpu, 
+                        'customextraip': customextraip,
+                        'issuelicense': issuelicense, 
+                        'internalip': internalip
                 }
-                return self.sQuery(args)
+                return self.sQuery(**data)
 
         def listNodesById(self, vtype='kvm'):
                 """
@@ -609,12 +728,15 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 nodes:str                       [nodeid,nodeid,nodeid]
                 """
-                args = {'action':'node-idlist', 'type':vtype}
-                return self.sQuery(args)
+                data = {
+                	'action': 'node-idlist', 
+                	'type': vtype
+                }
+                return self.sQuery(**data)
 
         def listNodesByName(self, vtype='kvm'):
                 """
@@ -626,12 +748,14 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 nodes:str                       [node1,node2,node3]
                 """
-                args = {'action':'listnodes', 'type':vtype}
-                return self.sQuery(args)
+                data = {
+                	'action': 'listnodes', 
+                	'type': vtype}
+                return self.sQuery(**data)
 
         def listISO(self, vtype='kvm'):
                 """
@@ -643,12 +767,15 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 iso:str                         [iso1,iso2,iso3]
                 """
-                args = {'action':'listiso', 'type':vtype}
-                return self.sQuery(args)
+                data = {
+                	'action': 'listiso', 
+                	'type': vtype
+                }
+                return self.sQuery(**data)
 
         def listNodeGroups(self, vtype='kvm'):
                 """
@@ -660,12 +787,15 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 nodegroups:str          [0|--none--,1|nodegroup1,2|nodegroup2,3|nodegroup3]
                 """
-                args = {'action':'listnodegroups', 'type':vtype}
-                return self.sQuery(args)
+                data = {
+                	'action': 'listnodegroups', 
+                	'type': vtype
+                }
+                return self.sQuery(**data)
 
         def listNodesByName(self, nodeid):
                 """
@@ -677,13 +807,16 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 ipcount:str
                 ips:str                         [ip1,ip2,ip3]
                 """
-                args = {'action':'node-iplist', 'nodeid':nodeid}
-                return self.sQuery(args)
+                data = {
+                	'action': 'node-iplist', 
+                	'nodeid': nodeid
+                }
+                return self.sQuery(**data)
 
         def listPlans(self, vtype='kvm'):
                 """
@@ -695,12 +828,15 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 plans:str                       [plan1,plan2,plan3]
                 """
-                args = {'action':'listplans','type':vtype}
-                return self.sQuery(args)
+                data = {
+                	'action': 'listplans',
+                	'type': vtype
+                }
+                return self.sQuery(**data)
 
         def listTemplates(self, vtype='kvm'):
                 """
@@ -712,14 +848,17 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 templates:str           [template1,template2,template3]
                 templateshvm:str        [template1,template2,template3]
                 templatekvm:str         [template1,template2,template3]
                 """
-                args = {'action':'listtemplates','type':vtype}
-                return self.sQuery(args)
+                data = {
+                	'action': 'listtemplates',
+                	'type': vtype
+                }
+                return self.sQuery(**data)
 
         def xenNodeResources(self, nodeid):
                 """
@@ -731,13 +870,16 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 freememory:str
                 freehdd:str
                 """
-                args = {'action':'node-xenresources','nodeid':nodeid}
-                return self.sQuery(args)
+                data = {
+                	'action': 'node-xenresources',
+                	'nodeid': nodeid
+                }
+                return self.sQuery(**data)
 
         def nodeStatistics(self, nodeid):
                 """
@@ -749,8 +891,8 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 id:str
                 name:str
                 ip:str
@@ -768,8 +910,11 @@ class SolusVM:
                 virtualservers:int
                 freeips:int
                 """
-                args = {'action':'node-statistics','nodeid':nodeid}
-                return self.sQuery(args)
+                data = {
+                	'action': 'node-statistics',
+                	'nodeid': nodeid
+                }
+                return self.sQuery(**data)
 
         def clientAuthenticate(self, username, password):
                 """
@@ -782,11 +927,15 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str           [validated|invalid username or password]
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>           [validated|invalid username or password]
                 """
-                args = {'action':'client-authenticate','username':username,'password':password}
-                return self.sQuery(args)
+                data = {
+                	'action': 'client-authenticate',
+                	'username': username,
+                	'password': password
+                }
+                return self.sQuery(**data)
 
         def clientExists(self, username):
                 """
@@ -798,11 +947,14 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str           [Client exists|*error message*]
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>           [Client exists|*error message*]
                 """
-                args = {'action':'client-checkexists','username':username}
-                return self.sQuery(args)
+                data = {
+                	'action': 'client-checkexists',
+                	'username': username
+                }
+                return self.sQuery(**data)
 
         def createClient(self, username, password, email, firstname, lastname, company):
                 """
@@ -819,8 +971,8 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 username:str
                 password:str
                 email:str
@@ -828,8 +980,16 @@ class SolusVM:
                 lastname:str
                 company:str
                 """
-                args = {'action':'client-create','username':username,'password':password,'email':email,'firstname':firstname,'lastname':lastname,'company':company}
-                return self.sQuery(args)
+                data = {
+	                'action': 'client-create',
+	                'username': username,
+	                'password': password,
+	                'email': email,
+	                'firstname': firstname,
+	                'lastname': lastname,
+	                'company': company
+                }
+                return self.sQuery(**data)
 
         def changeClientPassword(self, username, password):
                 """
@@ -842,13 +1002,17 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 username:str
                 password:str
                 """
-                args = {'action':'client-updatepassword','username':username,'password':password}
-                return self.sQuery(args)
+                data = {
+                	'action': 'client-updatepassword',
+                	'username': username,
+                	'password': password
+                }
+                return self.sQuery(**data)
 
         def listClients(self):
                 """
@@ -856,8 +1020,8 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 clients
                 -id:str
                 -username:str
@@ -870,8 +1034,8 @@ class SolusVM:
                 -created:str
                 -lastlogin:str
                 """
-                args = {'action':'client-list'}
-                return self.sQuery(args)
+                data = {'action':'client-list'}
+                return self.sQuery(**data)
 
         def deleteClient(self, username):
                 """
@@ -883,11 +1047,14 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 """
-                args = {'action':'client-delete','username':username}
-                return self.sQuery(args)
+                data = {
+                	'action': 'client-delete',
+                	'username': username
+                }
+                return self.sQuery(**data)
 
         def deleteReseller(self, username):
                 """
@@ -899,11 +1066,14 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 """
-                args = {'action':'reseller-delete','username':username}
-                return self.sQuery(args)
+                data = {
+                	'action': 'reseller-delete',
+                	'username': username
+                }
+                return self.sQuery(**data)
 
         def resellerInfo(self, username):
                 """
@@ -915,8 +1085,8 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 username:str
                 email:str
                 firstname:str
@@ -938,8 +1108,11 @@ class SolusVM:
                 kvm:str
                 openvz:str
                 """
-                args = {'action':'reseller-info','username':username}
-                return self.sQuery(args)
+                data = {
+                	'action': 'reseller-info',
+                	'username': username
+                }
+                return self.sQuery(**data)
 
         def listResellers(self):
                 """
@@ -947,14 +1120,14 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 usernames                       [username1,username2,username3]
                 """
-                args = {'action':'reseller-list'}
-                return self.sQuery(args)
+                data = {'action':'reseller-list'}
+                return self.sQuery(**data)
 
-        def createReseller(self, username, password, email, firstname, lastname, company, args=None):
+        def createReseller(self, username, password, email, firstname, lastname, company, **data):
                 """
                 Creates reseller.
 
@@ -984,8 +1157,8 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 username:str
                 email:str
                 firstname:str
@@ -1007,10 +1180,18 @@ class SolusVM:
                 *kvm:str
                 *openvz:str
                 """
-                args = args.update({'action':'reseller-create','username':username,'password':password,'email':email,'firstname':firstname,'lastname':lastname,'company':company})
-                return self.sQuery(args)
+                data = data.update({
+                	'action': 'reseller-create',
+                	'username': username,
+                	'password': password,
+                	'email': email,
+                	'firstname': firstname,
+                	'lastname': lastname,
+                	'company': company
+                })
+                return self.sQuery(**data)
 
-        def modifyResellerResources(self, username, args=None):
+        def modifyResellerResources(self, username, **data):
                 """
                 Creates reseller.
 
@@ -1034,8 +1215,8 @@ class SolusVM:
 
                 Returns JSON
                 ---
-                status:str              [success|error]
-                statusmsg:str
+                <status>success|error</status>
+                <statusmsg>MSG</statusmsg>
                 username:str
                 *maxvps:str
                 *maxdisk:str
@@ -1052,5 +1233,8 @@ class SolusVM:
                 *kvm:str
                 *openvz:str
                 """
-                args = args.update({'action':'reseller-modifyresources','username':username})
-                return self.sQuery(args)
+                data = data.update({
+                	'action': 'reseller-modifyresources',
+                	'username': username
+                })
+                return self.sQuery(**data)
