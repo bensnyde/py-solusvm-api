@@ -1,6 +1,6 @@
 """
 =====================================================
- SolusVM XMLRPC API Python Library
+ SolusVM JSON API Python Library
 =====================================================
 :Info: See <http://docs.solusvm.com/v2/Default.htm#Developer/Admin-Api/Admin-Api.htm> for  API implementation.
 :Author: Benton Snyder <introspectr3@gmail.com>
@@ -12,9 +12,9 @@ import requests
 
 class SolusVM:
         def __init__(self, url, api_id, api_key):
-                """SolusVM XMLRPC API Library constructor.
+                """SolusVM JSON API Library constructor.
 
-                :param url: FQDN to SolusVM instance (ex. solusvm.example.com)
+                :param url: SolusVM instance FQDN (ex. solusvm.example.com)
                 :param api_id: SolusVM API authentiction ID hash
                 :param api_key: SolusVM API authentication key hash
                 """
