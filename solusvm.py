@@ -12,12 +12,12 @@ import requests
 
 class SolusVM:
         def __init__(self, url, api_id, api_key):
-      """SolusVM XMLRPC API Library constructor.
+                """SolusVM XMLRPC API Library constructor.
 
-      :param url: FQDN to SolusVM instance (ex. solusvm.example.com)
-      :param api_id: SolusVM API authentiction ID hash
-      :param api_key: SolusVM API authentication key hash
-      """
+                :param url: FQDN to SolusVM instance (ex. solusvm.example.com)
+                :param api_id: SolusVM API authentiction ID hash
+                :param api_key: SolusVM API authentication key hash
+                """
                 self.url = url
                 self.id = api_id
                 self.key = api_key
