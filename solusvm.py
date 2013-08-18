@@ -35,7 +35,7 @@ class SolusVM:
 
         def listVirtualServers(self, nodeid):
                 """Lists virtual servers allocated on specified node.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/List-Virtual-Servers.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/List-Virtual-Servers.htm
 
                 :param nodeid: id of node
                 :returns: json formatted string
@@ -48,7 +48,7 @@ class SolusVM:
 
         def diablePXE(self, vserverid):
                 """Disables PXE on specified virtual server.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Pxe-Disable.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Pxe-Disable.htm
 
                 :param vserverid: id of virtual server
                 :returns: json formatted string
@@ -61,7 +61,7 @@ class SolusVM:
 
         def enablePXE(self, vserverid):
                 """Enables PXE on specified virtual server.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Pxe-Enable.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Pxe-Enable.htm
 
                 :param vserverid: id of virtual server
                 :returns: json formatted string
@@ -74,7 +74,7 @@ class SolusVM:
 
         def enableTUN(self, vserverid):
                 """
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Tun-Enable.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Tun-Enable.htm
                 Enables TUN/TAP on specified virtual server.
 
                 Arguments
@@ -90,7 +90,7 @@ class SolusVM:
 
         def disableTUN(self, vserverid):
                 """
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Tun-Disable.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Tun-Disable.htm
                 Disables TUN/TAP on specified virtual server.
 
                 Arguments
@@ -106,7 +106,7 @@ class SolusVM:
 
         def togglePAE(self, vserverid, pae):
                 """Toggles PAE for specified virtual server.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Pae.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Pae.htm
 
                 :param vserverid: id of virtual server
                 :param pae: on|off
@@ -121,7 +121,7 @@ class SolusVM:
 
         def shutdownVirtualServer(self, vserverid):
                 """Shuts down specified virtual server.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Shutdown.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Shutdown.htm
 
                 :param vserverid: id of virtual server
                 :returns: json formatted string
@@ -134,7 +134,7 @@ class SolusVM:
 
         def terminateVirtualServer(self, vserverid, deleteclient=False):
                 """Deletes specified virtual server.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Terminate.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Terminate.htm
 
                 :param vserverid: id of virtual server
                 :param deleteclient: whether or not to delete client too
@@ -149,7 +149,7 @@ class SolusVM:
 
         def changeVNCPassword(self, vserverid, vncpassword):
                 """
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Vnc-Password.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Vnc-Password.htm
                 Updates VNC password for specified virtual server.
 
                 :param vserverid: id of virtual server
@@ -165,7 +165,7 @@ class SolusVM:
 
         def vncInfo(self, vserverid):
                 """Retrieves VNC information for specified virtual server.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Vnc.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Vnc.htm
 
                 :param vserverid: id of virtual server
                 :returns: json formatted string
@@ -178,7 +178,7 @@ class SolusVM:
 
         def suspendVirtualServer(self, vserverid):
                 """Suspends specified virtual server.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Suspend.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Suspend.htm
 
                 :param vserverid: id of virtual server
                 :returns: json formatted string
@@ -191,7 +191,7 @@ class SolusVM:
 
         def unsuspendVirtualServer(self, vserverid):
                 """Unsuspends specified virtual server.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Unsuspend.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Unsuspend.htm
 
                 :param vserverid: id of virtual server
                 :returns: json formatted string
@@ -204,7 +204,7 @@ class SolusVM:
 
         def virtualServerStatus(self, vserverid):
                 """Retrieves status of specified virtual server.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Status.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Status.htm
 
                 :param vserverid: id of virtual server
                 :returns: json formatted string
@@ -217,7 +217,7 @@ class SolusVM:
 
         def changeRootPassword(self, vserverid, rootpassword):
                 """Retrieves status of specified virtual server.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Root-Password.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Root-Password.htm
 
                 :param vserverid: id of virtual server
                 :param rootpassword: new root password
@@ -232,7 +232,7 @@ class SolusVM:
 
         def rebuildVirtualServer(self, vserverid, template):
                 """Rebuilds specified virtual server with specified template.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Rebuild.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Rebuild.htm
 
                 :param vserverid: id of virtual server
                 :param template: template filename without extension
@@ -247,7 +247,7 @@ class SolusVM:
 
         def changeHostname(self, vserverid, hostname):
                 """Updates specified virtual server's hostname.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Change-Hostname.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Change-Hostname.htm
 
                 :param vserverid: id of virtual server
                 :param hostname: new hostname
@@ -262,7 +262,7 @@ class SolusVM:
 
         def rebootVirtualServer(self, vserverid):
                 """Reboots specified virtual server.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Reboot.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Reboot.htm
 
                 :param vserverid: id of virtual server
                 :returns: json formatted string
@@ -275,7 +275,7 @@ class SolusVM:
 
         def unmountISO(self, vserverid):
                 """Unmounts ISO from specified virtual server.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Unmount-Iso.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Unmount-Iso.htm
 
                 :param vserverid: id of virtual server
                 :returns: json formatted string
@@ -288,7 +288,7 @@ class SolusVM:
 
         def mountISO(self, vserverid, iso):
                 """Mounts specified ISO to specified virtual server.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Mount-Iso.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Mount-Iso.htm
 
                 :param vserverid: id of virtual server
                 :param iso: filename of iso
@@ -303,7 +303,7 @@ class SolusVM:
 
         def checkVirtualServerExists(self, vserverid):
                 """Checks if specified virtual server exists.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Check-Exists.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Check-Exists.htm
 
                 :param vserverid: id of virtual server
                 :returns: json formatted string
@@ -316,7 +316,7 @@ class SolusVM:
 
         def virtualServerState(self, vserverid, nostatus=False, nographs=False):
                 """Retrieves information about specified virtual server.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Information-All.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Information-All.htm
 
                 :param vserverid: id of virtual server
                 :param nostatus: whether or not to retrieve status
@@ -333,7 +333,7 @@ class SolusVM:
 
         def virtualServerInfo(self, vserverid):
                 """Retrieves information about specified virtual server.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Information.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Information.htm
 
                 :param vserverid: id of virtual server
                 :returns: json formatted string
@@ -346,7 +346,7 @@ class SolusVM:
 
         def deleteIPAddress(self, vserverid, ipaddr):
                 """Removes specified IP Address from specified virtual server.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Delete-Ip.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Delete-Ip.htm
 
                 :param vserverid: id of virtual server
                 :param ipaddr: ip address
@@ -361,7 +361,7 @@ class SolusVM:
 
         def toggleSerialConsole(self, vserverid, access=None, time=None):
                 """Retrieves, enables or disables serial console for specified virtual server.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Serial-Console.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Serial-Console.htm
 
                 :param vserverid: id of virtual server
                 :param access: enable|disable
@@ -378,7 +378,7 @@ class SolusVM:
 
         def changePlan(self, vserverid, plan):
                 """Changes specified virtual server's plan.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Change-Plan.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Change-Plan.htm
 
                 :param vserverid: id of virtual server
                 :param plan: new plan name
@@ -393,7 +393,7 @@ class SolusVM:
 
         def changeOwner(self, vserverid, clientid):
                 """Changes specified virtual server's owner.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Change-Owner.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Change-Owner.htm
 
                 :param vserverid: id of virtual server
                 :param clientid: new clients id
@@ -408,7 +408,7 @@ class SolusVM:
 
         def changeBootOrder(self, vserverid, bootorder):
                 """Changes specified virtual server's boot order.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Boot-Order.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Boot-Order.htm
 
                 :param vserverid: id of virtual server
                 :param bootorder: cd|dc|c|d (c=CDROM, d=HDD)
@@ -423,7 +423,7 @@ class SolusVM:
 
         def addIPAddress(self, vserverid):
                 """Adds an IP address to specified virtual server.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Add-Ipaddress.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Add-Ipaddress.htm
 
                 :param vserverid: id of virtual server
                 :returns: json formatted string
@@ -436,7 +436,7 @@ class SolusVM:
 
         def bootVirtualServer(self, vserverid):
                 """Boots specified virtual server.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Boot.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Boot.htm
 
                 :param vserverid: id of virtual server
                 :returns: json formatted string
@@ -449,7 +449,7 @@ class SolusVM:
 
         def createVirtualServer(self, **data):
                 """Creates virtual server.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Create-Virtual-Server.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Virtual-Server-Functions/Create-Virtual-Server.htm
 
                 :param data: dictionary parameter pairs
                 :returns: json formatted string
@@ -459,7 +459,7 @@ class SolusVM:
 
         def listNodesById(self, vtype='kvm'):
                 """Lists Nodes by their ID.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Node-Functions/List-Nodes-By-Id.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Node-Functions/List-Nodes-By-Id.htm
 
                 :param vtype: openvz|xen|xen hvm|kvm
                 :returns: json formatted string
@@ -472,7 +472,7 @@ class SolusVM:
 
         def listNodesByName(self, vtype='kvm'):
                 """List nodes by name.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Node-Functions/List-Nodes-By-Name.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Node-Functions/List-Nodes-By-Name.htm
 
                 :param vtype: openvz|xen|xen hvm|kvm
                 :returns: json formatted string
@@ -484,7 +484,7 @@ class SolusVM:
 
         def listISO(self, vtype='kvm'):
                 """Lists available ISO images.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Node-Functions/List-Iso.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Node-Functions/List-Iso.htm
 
                 :param vtype: xen hvm|kvm
                 :returns: json formatted string
@@ -497,7 +497,7 @@ class SolusVM:
 
         def listNodeGroups(self, vtype='kvm'):
                 """List node groups.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Node-Functions/Node-Groups.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Node-Functions/Node-Groups.htm
 
                 :param vtype: xen hvm|kvm
                 :returns: json formatted string
@@ -510,7 +510,7 @@ class SolusVM:
 
         def listNodesByName(self, nodeid):
                 """List nodes by name.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Node-Functions/List-Nodes-By-Name.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Node-Functions/List-Nodes-By-Name.htm
 
                 :param nodeid: id of node
                 :returns: json formatted string
@@ -523,7 +523,7 @@ class SolusVM:
 
         def listPlans(self, vtype='kvm'):
                 """List plans.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Node-Functions/List-Plans.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Node-Functions/List-Plans.htm
 
                 :param vtype: openvz|xen|xen hvm|kvm
                 :returns: json formatted string
@@ -536,7 +536,7 @@ class SolusVM:
 
         def listTemplates(self, vtype='kvm'):
                 """List templates.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Node-Functions/List-Templates.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Node-Functions/List-Templates.htm
 
                 :param vtype: openvz|xen|xen hvm|kvm
                 :returns: json formatted string
@@ -549,7 +549,7 @@ class SolusVM:
 
         def xenNodeResources(self, nodeid):
                 """Retrieve resource count from specified xen node.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Node-Functions/Node-Xen-Resources.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Node-Functions/Node-Xen-Resources.htm
 
                 :param nodeid: id of node
                 :returns: json formatted string
@@ -562,7 +562,7 @@ class SolusVM:
 
         def nodeStatistics(self, nodeid):
                 """Retrieve statistics for specified node.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Node-Functions/Node-Statistics.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Node-Functions/Node-Statistics.htm
 
                 :param nodeid: id of node
                 :returns: json formatted string
@@ -575,7 +575,7 @@ class SolusVM:
 
         def clientAuthenticate(self, username, password):
                 """Authenticates specified username and password.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Client-Functions/Client-Authenticate.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Client-Functions/Client-Authenticate.htm
 
                 :param username:
                 :param password:
@@ -590,7 +590,7 @@ class SolusVM:
 
         def clientExists(self, username):
                 """Checks to see if the specified client exists.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Client-Functions/Client-Exists.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Client-Functions/Client-Exists.htm
 
 
                 Arguments
@@ -606,7 +606,7 @@ class SolusVM:
 
         def createClient(self, username, password, email, firstname, lastname, company):
                 """Creates a client.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Client-Functions/Create-Client.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Client-Functions/Create-Client.htm
 
                 :param username:
                 :param password:
@@ -629,7 +629,7 @@ class SolusVM:
 
         def changeClientPassword(self, username, password):
                 """Updates the specified client's password.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Client-Functions/Client-Change-Password.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Client-Functions/Client-Change-Password.htm
 
                 :param username:
                 :param password:
@@ -644,7 +644,7 @@ class SolusVM:
 
         def listClients(self):
                 """Lists all clients.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Client-Functions/Client-List.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Client-Functions/Client-List.htm
 
                 :returns: json formatted string
                 """
@@ -653,7 +653,7 @@ class SolusVM:
 
         def deleteClient(self, username):
                 """Deletes specified client.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Client-Functions/Client-Delete.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Client-Functions/Client-Delete.htm
 
                 :param username:
                 :returns: json formatted string
@@ -666,7 +666,7 @@ class SolusVM:
 
         def deleteReseller(self, username):
                 """Deletes specified reseller.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Client-Functions/Reseller-Delete.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Client-Functions/Reseller-Delete.htm
 
                 :param username:
                 :returns: json formatted string
@@ -679,7 +679,7 @@ class SolusVM:
 
         def resellerInfo(self, username):
                 """Retrieves details of specified reseller.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Client-Functions/Reseller-Information.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Client-Functions/Reseller-Information.htm
 
                 :param username:
                 :returns: json formatted string
@@ -692,7 +692,7 @@ class SolusVM:
 
         def listResellers(self):
                 """Lists all resellers.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Client-Functions/Reseller-List.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Client-Functions/Reseller-List.htm
 
                 :returns: json formatted string
                 """
@@ -701,7 +701,7 @@ class SolusVM:
 
         def createReseller(self, **data):
                 """Creates reseller.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Client-Functions/Create-Reseller.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Client-Functions/Create-Reseller.htm
 
                 :param data: dictionary paramater pairs
                 :returns: json formatted string
@@ -711,7 +711,7 @@ class SolusVM:
 
         def modifyResellerResources(self, username, **data):
                 """Modifies reseller's available resources.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Client-Functions/Reseller-Modify-Resources.htm -
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Client-Functions/Reseller-Modify-Resources.htm
 
                 :param username:
                 :param data: dictionary paramater pairs
