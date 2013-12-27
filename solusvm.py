@@ -508,9 +508,9 @@ class SolusVM:
                 }
                 return self.sQuery(**data)
 
-        def listNodesByName(self, nodeid):
-                """List nodes by name.
-                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Node-Functions/List-Nodes-By-Name.htm
+        def listNodesIPAddresses(self, nodeid):
+                """List all IP addresses for a node.
+                http://docs.solusvm.com/v2/Content/Developer/Admin-Api/Node-Functions/List-Ip-Per-Node.htm
 
                 :param nodeid: id of node
                 :returns: json formatted string
