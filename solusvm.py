@@ -281,7 +281,7 @@ class SolusVM:
                 :returns: json formatted string
                 """
                 data = {
-                        'action': 'vserver-reboot',
+                        'action': 'vserver-unmountiso',
                         'vserverid': vserverid
                 }
                 return self.sQuery(**data)
