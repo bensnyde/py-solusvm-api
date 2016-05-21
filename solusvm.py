@@ -12,17 +12,17 @@
 import requests
 
 class SolusVM:
-    def __init__(self, url, api_id, api_key):
+    def __init__(self, base_url, api_id, api_key):
         """SolusVM JSON API Library constructor.
 
         Parameters
-            url: SolusVM instance FQDN (ex. solusvm.example.com)
+            base_url: SolusVM base_url
             api_id: SolusVM API authentiction ID hash
             api_key: SolusVM API authentication key hash
         Returns
             None
         """
-        self.url = url
+        self.base_url = base_url
         self.id = api_id
         self.key = api_key
 
@@ -40,7 +40,7 @@ class SolusVM:
                 'key':self.key
         })
 
-        response = requests.get('https://'+self.url+':5656/api/admin/command.php', params=kwargs, timeout=2)
+        response = requests.get('https://'+self.base_url+':5656/api/admin/command.php', params=kwargs, timeout=2)
         return response.json()
 
     def listVirtualServers(self, nodeid):
@@ -53,11 +53,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'node-virtualservers',
             'nodeid': nodeid
-        }
-        return self._sQuery(data)
+        })
 
     def diablePXE(self, vserverid):
         """Disables PXE on specified virtual server.
@@ -69,11 +68,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-network-disable',
             'vserverid': vserverid
-        }
-        return self._sQuery(data)
+        })
 
     def enablePXE(self, vserverid):
         """Enables PXE on specified virtual server.
@@ -85,11 +83,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-network-enable',
             'vserverid': vserverid
-        }
-        return self._sQuery(data)
+        })
 
     def enableTUN(self, vserverid):
         """Enables TUN/TAP on specified virtual server.
@@ -101,11 +98,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-tun-enable',
             'vserverid': vserverid
-        }
-        return self._sQuery(data)
+        })
 
     def disableTUN(self, vserverid):
         """Disables TUN/TAP on specified virtual server.
@@ -117,11 +113,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-tun-disable',
             'vserverid': vserverid
-        }
-        return self._sQuery(data)
+        })
 
     def togglePAE(self, vserverid, pae):
         """Toggles PAE for specified virtual server.
@@ -134,12 +129,11 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-pae',
             'vserverid': vserverid,
             'pae':pae
-        }
-        return self._sQuery(data)
+        })
 
     def shutdownVirtualServer(self, vserverid):
         """Shuts down specified virtual server.
@@ -151,11 +145,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-shutdown',
             'vserverid': vserverid
-        }
-        return self._sQuery(data)
+        })
 
     def terminateVirtualServer(self, vserverid, deleteclient=False):
         """Deletes specified virtual server.
@@ -168,12 +161,11 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-terminate',
             'vserverid': vserverid,
             'deleteclient': deleteclient
-        }
-        return self._sQuery(data)
+        })
 
     def changeVNCPassword(self, vserverid, vncpassword):
         """Updates VNC password for specified virtual server.
@@ -186,12 +178,11 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-vncpass',
             'vserverid': vserverid,
             'vncpassword': vncpassword
-        }
-        return self._sQuery(data)
+        })
 
     def vncInfo(self, vserverid):
         """Retrieves VNC information for specified virtual server.
@@ -203,11 +194,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-vnc',
             'vserverid': vserverid
-        }
-        return self._sQuery(data)
+        })
 
     def suspendVirtualServer(self, vserverid):
         """Suspends specified virtual server.
@@ -219,11 +209,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-suspend',
             'vserverid':vserverid
-        }
-        return self._sQuery(data)
+        })
 
     def unsuspendVirtualServer(self, vserverid):
         """Unsuspends specified virtual server.
@@ -235,11 +224,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-unsuspend',
             'vserverid': vserverid
-        }
-        return self._sQuery(data)
+        })
 
     def virtualServerStatus(self, vserverid):
         """Retrieves status of specified virtual server.
@@ -251,11 +239,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-status',
             'vserverid': vserverid
-        }
-        return self._sQuery(data)
+        })
 
     def changeRootPassword(self, vserverid, rootpassword):
         """Retrieves status of specified virtual server.
@@ -268,12 +255,11 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-rootpassword',
             'vserverid': vserverid,
             'rootpassword': rootpassword
-        }
-        return self._sQuery(data)
+        })
 
     def rebuildVirtualServer(self, vserverid, template):
         """Rebuilds specified virtual server with specified template.
@@ -286,12 +272,11 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-rebuild',
             'vserverid': vserverid,
             'template': template
-        }
-        return self._sQuery(data)
+        })
 
     def changeHostname(self, vserverid, hostname):
         """Updates specified virtual server's hostname.
@@ -304,12 +289,11 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-hostname',
             'vserverid': vserverid,
             'hostname': hostname
-        }
-        return self._sQuery(data)
+        })
 
     def rebootVirtualServer(self, vserverid):
         """Reboots specified virtual server.
@@ -321,11 +305,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-reboot',
             'vserverid': vserverid
-        }
-        return self._sQuery(data)
+        })
 
     def unmountISO(self, vserverid):
         """Unmounts ISO from specified virtual server.
@@ -337,11 +320,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-unmountiso',
             'vserverid': vserverid
-        }
-        return self._sQuery(data)
+        })
 
     def mountISO(self, vserverid, iso):
         """Mounts specified ISO to specified virtual server.
@@ -354,12 +336,11 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-mountiso',
             'vserverid': vserverid,
             'iso': iso
-        }
-        return self._sQuery(data)
+        })
 
     def checkVirtualServerExists(self, vserverid):
         """Checks if specified virtual server exists.
@@ -371,11 +352,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-checkexists',
             'vserverid': vserverid
-        }
-        return self._sQuery(data)
+        })
 
     def virtualServerState(self, vserverid, nostatus=False, nographs=False):
         """Retrieves information about specified virtual server.
@@ -389,13 +369,12 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-infoall',
             'vserverid': vserverid,
             'nostatus': nostatus,
             'nographs': nographs
-        }
-        return self._sQuery(data)
+        })
 
     def virtualServerInfo(self, vserverid):
         """Retrieves information about specified virtual server.
@@ -407,11 +386,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-info',
             'vserverid': vserverid
-        }
-        return self._sQuery(data)
+        })
 
     def deleteIPAddress(self, vserverid, ipaddr):
         """Removes specified IP Address from specified virtual server.
@@ -424,12 +402,11 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-delip',
             'vserverid': vserverid,
             'ipaddr': ipaddr
-        }
-        return self._sQuery(data)
+        })
 
     def toggleSerialConsole(self, vserverid, access=None, time=None):
         """Retrieves, enables or disables serial console for specified virtual server.
@@ -443,13 +420,12 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-console',
             'vserverid': vserverid,
             'time': time,
             'access': access
-        }
-        return self._sQuery(data)
+        })
 
     def changePlan(self, vserverid, plan):
         """Changes specified virtual server's plan.
@@ -462,12 +438,11 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-change',
             'vserverid': vserverid,
             'plan':plan
-        }
-        return self._sQuery(data)
+        })
 
     def changeOwner(self, vserverid, clientid):
         """Changes specified virtual server's owner.
@@ -480,12 +455,11 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-changeowner',
             'vserverid': vserverid,
             'clientid': clientid
-        }
-        return self._sQuery(data)
+        })
 
     def changeBootOrder(self, vserverid, bootorder):
         """Changes specified virtual server's boot order.
@@ -498,12 +472,11 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-bootorder',
             'vserverid': vserverid,
             'bootorder': bootorder
-        }
-        return self._sQuery(data)
+        })
 
 
     def changeBandwidthLimits(self, vserverid, limit, overlimit):
@@ -518,13 +491,12 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-bandwidth',
             'vserverid': vserverid,
             'limit': limit,
             'overlimit': overlimit
-        }
-        return self._sQuery(data)
+        })
 
     def changeMemory(self, vserverid, memory):
         """Changes specified virtual server's allocated memory.
@@ -537,12 +509,11 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-change-memory',
             'vserverid': vserverid,
             'memory': memory
-        }
-        return self._sQuery(data)
+        })
 
     def changeCPU(self, vserverid, cpu):
         """Changes specified virtual server's number of CPU cores.
@@ -555,12 +526,11 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-change-cpu',
             'vserverid': vserverid,
             'cpu': cpu,
-        }
-        return self._sQuery(data)
+        })
 
     def changeHDD(self, vserverid, hdd):
         """Changes specified virtual server's hard disk size.
@@ -573,12 +543,11 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-change-hdd',
             'vserverid': vserverid,
             'hdd': hdd,
-        }
-        return self._sQuery(data)
+        })
 
 
     def addIPAddress(self, vserverid):
@@ -591,11 +560,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-addip',
             'vserverid': vserverid
-        }
-        return self._sQuery(data)
+        })
 
     def bootVirtualServer(self, vserverid):
         """Boots specified virtual server.
@@ -607,11 +575,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'vserver-boot',
             'vserverid': vserverid
-        }
-        return self._sQuery(data)
+        })
 
     def createVirtualServer(self, kwargs):
         """Creates virtual server.
@@ -623,7 +590,7 @@ class SolusVM:
         Returns
             json
         """
-        kwargs.update({'action': 'vserver-create'})
+        kwargs['action'] = 'vserver-create'
         return self._sQuery(kwargs)
 
     def listNodesById(self, vtype='kvm'):
@@ -636,11 +603,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'node-idlist',
             'type': vtype
-        }
-        return self._sQuery(data)
+        })
 
     def listNodesByName(self, vtype='kvm'):
         """List nodes by name.
@@ -652,11 +618,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'listnodes',
             'type': vtype
-        }
-        return self._sQuery(data)
+        })
 
     def listISO(self, vtype='kvm'):
         """Lists available ISO images.
@@ -668,11 +633,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'listiso',
             'type': vtype
-        }
-        return self._sQuery(data)
+        })
 
     def listNodeGroups(self, vtype='kvm'):
         """List node groups.
@@ -684,11 +648,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'listnodegroups',
             'type': vtype
-        }
-        return self._sQuery(data)
+        })
 
     def listNodesIPAddresses(self, nodeid):
         """List all IP addresses for a node.
@@ -700,11 +663,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'node-iplist',
             'nodeid': nodeid
-        }
-        return self._sQuery(data)
+        })
 
     def listPlans(self, vtype='kvm'):
         """List plans.
@@ -716,11 +678,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'listplans',
             'type': vtype
-        }
-        return self._sQuery(data)
+        })
 
     def listTemplates(self, vtype='kvm'):
         """List templates.
@@ -732,11 +693,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'listtemplates',
             'type': vtype
-        }
-        return self._sQuery(data)
+        })
 
     def xenNodeResources(self, nodeid):
         """Retrieve resource count from specified xen node.
@@ -748,11 +708,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'node-xenresources',
             'nodeid': nodeid
-        }
-        return self._sQuery(data)
+        })
 
     def nodeStatistics(self, nodeid):
         """Retrieve statistics for specified node.
@@ -764,11 +723,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'node-statistics',
             'nodeid': nodeid
-        }
-        return self._sQuery(data)
+        })
 
     def clientAuthenticate(self, username, password):
         """Authenticates specified username and password.
@@ -781,12 +739,11 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'client-authenticate',
             'username': username,
             'password': password
-        }
-        return self._sQuery(data)
+        })
 
     def clientExists(self, username):
         """Checks to see if the specified client exists.
@@ -799,11 +756,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'client-checkexists',
             'username': username
-        }
-        return self._sQuery(data)
+        })
 
     def createClient(self, username, password, email, firstname, lastname, company):
         """Creates a client.
@@ -820,7 +776,7 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'client-create',
             'username': username,
             'password': password,
@@ -828,8 +784,7 @@ class SolusVM:
             'firstname': firstname,
             'lastname': lastname,
             'company': company
-        }
-        return self._sQuery(data)
+        })
 
     def changeClientPassword(self, username, password):
         """Updates the specified client's password.
@@ -842,12 +797,11 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'client-updatepassword',
             'username': username,
             'password': password
-        }
-        return self._sQuery(data)
+        })
 
     def changeClientUsername(self, username, newusername):
         """Updates the specified client's password.
@@ -860,12 +814,11 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'client-change-username',
             'username': username,
             'newusername': newusername
-        }
-        return self._sQuery(data)
+        })
 
     def listClients(self):
         """Lists all clients.
@@ -877,10 +830,9 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action':'client-list'
-        }
-        return self._sQuery(data)
+        })
 
     def deleteClient(self, username):
         """Deletes specified client.
@@ -892,11 +844,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'client-delete',
             'username': username
-        }
-        return self._sQuery(data)
+        })
 
     def editClient(self, username, kwargs):
         """Edits specified client.
@@ -912,10 +863,8 @@ class SolusVM:
         Returns
             json
         """
-        kwargs.update({
-            'action': 'client-edit',
-            'username': username
-        })
+        kwargs['action'] = 'client-edit'
+        kwargs['username'] = username
         return self._sQuery(kwargs)
 
     def deleteReseller(self, username):
@@ -928,11 +877,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'reseller-delete',
             'username': username
-        }
-        return self._sQuery(data)
+        })
 
     def resellerInfo(self, username):
         """Retrieves details of specified reseller.
@@ -944,11 +892,10 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action': 'reseller-info',
             'username': username
-        }
-        return self._sQuery(data)
+        })
 
     def listResellers(self):
         """Lists all resellers.
@@ -960,10 +907,9 @@ class SolusVM:
         Returns
             json
         """
-        data = {
+        return self._sQuery({
             'action':'reseller-list'
-        }
-        return self._sQuery(data)
+        })
 
     def createReseller(self, kwargs):
         """Creates reseller.
@@ -975,7 +921,7 @@ class SolusVM:
         Returns
             json
         """
-        kwargs.update({'action': 'reseller-create'})
+        kwargs['action'] = 'reseller-create'
         return self._sQuery(kwargs)
 
     def modifyResellerResources(self, username, kwargs):
@@ -989,8 +935,6 @@ class SolusVM:
         Returns
             json
         """
-        kwargs.update({
-            'action': 'reseller-modifyresources',
-            'username': username
-        })
+        kwargs['action'] = 'reseller-modifyresources'
+        kwargs['username'] = username
         return self._sQuery(kwargs)
